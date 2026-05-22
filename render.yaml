@@ -1,0 +1,28 @@
+# render.yaml — Deploy automático no Render
+# Commit este arquivo na raiz do repositório e importe o repo no Render.
+# O Render detecta este arquivo e cria os dois serviços automaticamente.
+
+services:
+  # Web Service — Node.js + Express (backend + frontend estático)
+  - type: web
+    name: vault-postgres
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true          # Render gera um valor aleatório automaticamente
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vault-db             # Referencia o banco abaixo
+          property: connectionString
+
+# Banco de dados PostgreSQL gerenciado pelo Render
+databases:
+  - name: vault-db
+    databaseName: vault
+    user: vault_user
+    plan: free

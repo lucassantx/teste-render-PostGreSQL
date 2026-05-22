@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VAULT — Controle de Acesso</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div id="auth-screen">
+    <div class="auth-wrap">
+      <div class="auth-brand">
+        <span class="brand-dot"></span>
+        VAULT
+      </div>
+      <p class="auth-sub">Verificação e Autenticação de Usuários em Levels Táticos</p>
+
+      <div class="tab-group">
+        <button class="tab active" onclick="showTab('login')">Entrar</button>
+        <button class="tab" onclick="showTab('cadastro')">Cadastrar</button>
+      </div>
+
+      <div id="tab-login" class="form-block">
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" id="login-email" placeholder="seu@email.com" />
+        </div>
+        <div class="field">
+          <label>Senha</label>
+          <input type="password" id="login-senha" placeholder="••••••••" />
+        </div>
+        <button class="btn-main" onclick="fazerLogin()">Entrar</button>
+      </div>
+
+      <div id="tab-cadastro" class="form-block" style="display:none">
+        <div class="field">
+          <label>Nome</label>
+          <input type="text" id="cad-nome" placeholder="Nome completo" />
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" id="cad-email" placeholder="seu@email.com" />
+        </div>
+        <div class="field">
+          <label>Senha</label>
+          <input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres" />
+        </div>
+        <div class="field">
+          <label>Cargo</label>
+          <select id="cad-cargo">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button class="btn-main" onclick="fazerCadastro()">Criar conta</button>
+      </div>
+
+      <p id="auth-erro" class="msg-erro"></p>
+    </div>
+  </div>
+
+  <div id="dashboard" style="display:none">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="brand-dot"></span>
+        <span class="topbar-brand">VAULT</span>
+      </div>
+      <div class="topbar-right">
+        <span id="user-nome" class="topbar-nome"></span>
+        <span id="user-badge" class="cargo-tag"></span>
+        <button class="btn-sair" onclick="fazerLogout()">Sair</button>
+      </div>
+    </header>
+
+    <main class="grid">
+
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2>Dados Públicos</h2>
+            <p class="card-desc">Visível para todos os usuários autenticados</p>
+          </div>
+          <span class="status status-ok">Liberado</span>
+        </div>
+        <div id="dados-publicos" class="card-body">Carregando...</div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2>Área Administrativa</h2>
+            <p class="card-desc">Restrito ao cargo Admin</p>
+          </div>
+          <span id="badge-admin" class="status"></span>
+        </div>
+        <div id="dados-admin" class="card-body">Carregando...</div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2>Meu Perfil</h2>
+            <p class="card-desc">Seus dados no banco</p>
+          </div>
+          <span class="status status-ok">Liberado</span>
+        </div>
+        <div id="dados-perfil" class="card-body">Carregando...</div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
