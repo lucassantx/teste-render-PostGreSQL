@@ -41,21 +41,8 @@ CREATE TABLE IF NOT EXISTS settings (
   updated_at TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 
--- ============================================================
--- Dados de exemplo (populados na primeira inicialização)
--- ============================================================
-
-INSERT INTO announcements (title, body) VALUES
-  ('Sistema online',  'Acesso disponível para todos os usuários.'),
-  ('Versão atual',    'Atualizado em Abril de 2026.')
-ON CONFLICT DO NOTHING;
-
-INSERT INTO reports (quarter, title, value) VALUES
-  ('Q1', 'Relatório Q1', 1621.00),
-  ('Q2', 'Relatório Q2', 3425.00)
-ON CONFLICT DO NOTHING;
-
+-- Configurações iniciais (inseridas apenas uma vez)
 INSERT INTO settings (key, value) VALUES
   ('maintenanceMode', 'false'),
-  ('totalUsers',      '7')
+  ('totalUsers',      '0')
 ON CONFLICT DO NOTHING;
