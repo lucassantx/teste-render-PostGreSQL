@@ -25,10 +25,12 @@ app.get('*', (req, res) => {
 });
 
 // ── Inicialização do banco ──────────────────────────────────
+// Roda apenas os CREATE TABLE e configurações iniciais.
+// Dados de exemplo ficam no seed.js — execute separadamente com: node seed.js
 async function inicializarBanco() {
   const sql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
   await pool.query(sql);
-  console.log('✔ Banco inicializado (tabelas e dados de exemplo prontos)');
+  console.log('✔ Banco inicializado (tabelas prontas)');
 }
 
 // ── Start ───────────────────────────────────────────────────
